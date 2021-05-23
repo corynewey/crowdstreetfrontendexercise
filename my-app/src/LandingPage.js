@@ -199,9 +199,35 @@ class LandingPage extends React.Component {
   }
 
   handleSubmit() {
+    debugger;
     // I don't know why this is undefined here. It isn't undefined for my other handler functions.
-    window.landingPage.props.history.push("/disqualification");
-    console.log(this);
+    let self = this ? this : window.landingPage;
+    self.mockFetch(self.state).then(value => {
+      debugger;
+      if ('disqualify' === value) {
+        self.props.history.push("/disqualification");
+      }
+      else {
+        self.props.history.push("/newAccount");
+      }
+    });
+    console.log(self);
+  }
+
+  // The instructions say that this mock fetch call should have the same interface as the real fetch. However, I can't
+  // find the interface definition of the real fetch call anywhere. I'm just assuming that it accepts a json object
+  // that holds all of the data needed to make a decision.
+  mockFetch(parms) {
+    // Very quick and dirty...
+    const disqualifiedMsg = 'disqualify';
+    let decision = 'qualified';
+    if (parms.investmentAmount > (parms.yearlyIncome / 5)) { decision = disqualifiedMsg; }
+    if (parms.creditScore < 600) { decision = disqualifiedMsg; }
+    if (parms.investmentAmount > (parms.netWorth * 0.03)) { decision = disqualifiedMsg; }
+    if (parms.investmentAmount > 9000000) { decision = disqualifiedMsg; }
+    return new Promise((resolve, reject) => {
+      resolve(decision);
+    });
   }
 
   render() {

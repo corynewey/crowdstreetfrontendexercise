@@ -5,16 +5,19 @@ import './index.css';
 import LandingPage from './LandingPage';
 import Newaccount from "./Newaccount";
 import Disqualification from "./Disqualification";
+import AccountPage from "./AccountPage";
 import reportWebVitals from './reportWebVitals';
 
 const LandingPageWithRouter = withRouter(LandingPage);
+const NewAccountPageWithRouter = withRouter(Newaccount);
 
 ReactDOM.render(
     <Router>
         <div>
             <Route exact path="/" component={LandingPageWithRouter} />
-            <Route path="/newAccount" component={Newaccount} />
+            <Route path="/newAccount" component={NewAccountPageWithRouter} />
             <Route path="/disqualification" component={Disqualification} />
+            <Route path="/accountPage" component={AccountPage} />
         </div>
     </Router>,
   document.getElementById('root')
