@@ -195,11 +195,11 @@ class LandingPage extends React.Component {
   }
 
   handleSubmit() {
-    debugger;
     // I don't know why this is undefined here. It isn't undefined for my other handler functions.
     let self = this ? this : window.landingPage;
-    self.mockFetch(self.state).then(value => {
-      debugger;
+    self.mockFetch('https://www.nowhere.com/checkQualifications', {
+      method: 'POST', body: JSON.stringify(self.state)
+    }).then(value => {
       if ('disqualify' === value) {
         self.props.history.push("/disqualification");
       }
@@ -210,16 +210,22 @@ class LandingPage extends React.Component {
     console.log(self);
   }
 
-  // The instructions say that this mock fetch call should have the same interface as the real fetch. However, I can't
-  // find the interface definition of the real fetch call anywhere. I'm just assuming that it accepts a json object
-  // that holds all of the data needed to make a decision.
-  mockFetch(parms) {
+  mockFetch(url, options) {
+    let parms = JSON.parse(options.body);
+
     // Very quick and dirty...
     const disqualifiedMsg = 'disqualify';
     let decision = 'qualified';
+    // if the Investment Amount is more than 1/5th of their Yearly Income
     if (parms.investmentAmount > (parms.yearlyIncome / 5)) { decision = disqualifiedMsg; }
+    // or their Estimated Credit is below 600
     if (parms.creditScore < 600) { decision = disqualifiedMsg; }
+    // or their Investment Amount is more than 3% of their Total Net Worth
     if (parms.investmentAmount > (parms.netWorth * 0.03)) { decision = disqualifiedMsg; }
+    // A `Bad Request` response should be returned for any Investment Amount above $9,000,000. I don't understand what
+    // is meant by 'Bad Request' response (am I expected to return a response object that has an http response code?)
+    // and since I would probably handle a bad request by routing the user to the "Disqualified" page anyway, just
+    // return 'disqualify'.
     if (parms.investmentAmount > 9000000) { decision = disqualifiedMsg; }
     return new Promise((resolve, reject) => {
       resolve(decision);
