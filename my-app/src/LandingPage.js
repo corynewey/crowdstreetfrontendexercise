@@ -27,8 +27,8 @@ class InvestmentAmount extends React.Component {
     }
     return (
         <div>
-          Investment Amount <input style={style} type="text" value={this.state.val} onChange={this.handleChange}/>
-          <div style={errorStyle}>Please enter only dollar amounts.</div>
+          Investment Amount <input style={style} type="text" value={this.state.val} onChange={this.handleChange} title="investAmountInput" />
+          <div style={errorStyle} title="investAmountError">Please enter only dollar amounts.</div>
         </div>
     );
   }
@@ -170,10 +170,6 @@ class LandingPage extends React.Component {
       creditScore: 0
     }
   }
-
-  // static propTypes = {
-  //   history: PropTypes.object.isRequired
-  // }
 
   handleChildChange(name, value) {
     // I know that the state should be considered immutable and we should create a new one for each update, but

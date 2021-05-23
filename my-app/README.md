@@ -1,6 +1,30 @@
-# Getting Started with Create React App
+# CrowdStreet Front-end Assignment
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Although I have developed in Javascript for many years, I have never done in anything in React outside of the little
+Tic-Tac-Toe game tutorial that React offers on its site. Since that tutorial is a SAP, I had to dig in and learn about
+React routing which was a good challenge since, while there is a good amount of information online about it, much of it 
+is confusing and contradictory because of the different versions of routine that exist. It was a great learning experience 
+and kind of fun working everything out.
+
+I also had difficulty with the styling: no matter what I did, the styling that I added to the css file never took effect. 
+When I inspected the element that I was trying to apply the style to in the browser developer tools, I could see the 
+'className="blah-blah"' that I had put in the tag, but it of course didn't actually affect the styling of the element 
+since the browser only understands the class attribute. To work around this, I implemented a dynamic styling, using the 
+style attribute of course. That is how I change the styling of input fields to indicate an error.
+
+I did take some short-cuts as you will note from my comments in the code. Specifically, I'm sure there are good React 
+ways to communicate between sibling components on a page (no parent-child relationship between them), but after the 4 
+hours I had worked on this, I wasn't really in the mood to figure it out. So, I just set a reference to the component as 
+a variable on the window object and use that reference to access the component's value. It's not a good idea since it 
+breaks encapsulation, and in the real world I wouldn't do it that way but this is just an exercise, right?
+
+A word about testing: As part of the research and learning that I had to accomplish in order to complete this assignment,
+I of course learned about testing React with the React Testing Library and Jest. However, I only completed one unit test
+on the Investment Amount input field. I completed the one test in order to exercise what I had learned but since I've 
+already spent so much time on this, I only completed the one test.
+
+A note about authentication: since all of the pages in this application, except the final acount page, are meant to be 
+open to the public, I haven't implemented any authentication security (which would be done on the back-end anyway).
 
 ## Available Scripts
 

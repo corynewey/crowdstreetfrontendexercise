@@ -34,7 +34,8 @@ class Password1 extends React.Component {
   constructor(props) {
     super();
     // This is super kludgey but I've been working on this and the back-end assignment for hours now and I'm tired so
-    // I'm not going to figure out how to do it correctly. This is needed to compare passwords to make sure they match.
+    // I'm not going to figure out how to do it correctly. This allows the Password2 component to access the value of
+    // this component in order to compare passwords to make sure they match.
     window.Password1 = this;
     this.state = { val: '', className: 'error-input' }
   }
@@ -57,7 +58,7 @@ class Password1 extends React.Component {
     }
     return (
         <div>
-          Username <input style={style} type="text" value={this.state.val} onChange={this.handleChange}/>
+          Password <input style={style} type="text" value={this.state.val} onChange={this.handleChange}/>
           <div style={errorStyle}>Passwords must be at least 8 characters and contain at least one number and special character (#@&*).</div>
         </div>
     );
@@ -88,7 +89,7 @@ class Password2 extends React.Component {
     }
     return (
         <div>
-          Username <input style={style} type="text" value={this.state.val} onChange={this.handleChange}/>
+          Password (again) <input style={style} type="text" value={this.state.val} onChange={this.handleChange}/>
           <div style={errorStyle}>Passwords must match.</div>
         </div>
     );
